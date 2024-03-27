@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_doixe"
+        android:title="Đội Xe"
+        android:icon="@drawable/menu_car"/>
+    <item
+        android:id="@+id/menu_taixe"
+        android:title="Tài Xế"
+        android:icon="@drawable/menu_taixe"/>
+    <item
+        android:id="@+id/menu_chuyendi"
+        android:title="Chuyến Đi"
+        android:icon="@drawable/baseline_event_24"/>
+    <item
+        android:id="@+id/menu_doanhso"
+        android:title="Doanh Số"
+        android:icon="@drawable/baseline_stacked_bar_chart"/>
+
+</menu>

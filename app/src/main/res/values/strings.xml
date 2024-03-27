@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">demobtlLTNC</string>
+    <string name="api">AIzaSyAPd4jIf5Y0jv9hhQf3ZAhQwwJ0AXNF5nk</string>
+    <string-array name="loaixe">
+        <item> xe tai</item>
+        <item> xe khach</item>
+        <item> xe container</item>
+    </string-array>
+
+    <string-array name="loainhienlieu">
+        <item> xang</item>
+        <item> dau</item>
+        <item> dien</item>
+    </string-array>
+
+    <string-array name="tinhtrang">
+        <item> đang hoạt động</item>
+        <item> đang bảo trì</item>
+        <item> không hoạt động</item>
+    </string-array>
+
+    <string-array name="tinhtrangTaiXe">
+        <item> trong chuyến</item>
+        <item> nghỉ làm</item>
+        <item> đang rảnh</item>
+    </string-array>
+
+    <string-array name="tinhtrangKeHoach">
+        <item> chưa bắt đầu</item>
+        <item> trên đường</item>
+        <item> đã hoành thành</item>
+    </string-array>
+    <string name="timXe">tim xe</string>
+</resources>

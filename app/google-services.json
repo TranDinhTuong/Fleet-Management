@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "408949806370",
+    "project_id": "ltnc-626a8",
+    "storage_bucket": "ltnc-626a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408949806370:android:ca66842b225d7db035017b",
+        "android_client_info": {
+          "package_name": "com.example.demobtlltnc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8q4_MCxgWUgAJgnG-36amP14Hk7bRfWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
