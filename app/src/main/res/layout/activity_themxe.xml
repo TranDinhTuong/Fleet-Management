@@ -83,7 +83,7 @@
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_bienso"
-                android:hint="bien so"
+                android:hint=" Biển Số"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:layout_width="match_parent"
@@ -99,7 +99,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_kichThuoc"
                 android:inputType="phone"
-                android:hint="kich thuoc"
+                android:hint=" Kích Thước"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:layout_width="match_parent"
@@ -116,7 +116,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_trongTai"
                 android:inputType="phone"
-                android:hint="trong tai"
+                android:hint=" Trọng Tải "
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:layout_width="match_parent"
@@ -134,7 +134,7 @@
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/btn_them"
-            android:text="Them"
+            android:text="Thêm"
             android:layout_weight="1"
             android:backgroundTint="@android:color/holo_blue_dark"
             android:textColor="@color/white"
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/btn_thoat"
-            android:text="Thoat"
+            android:text="Thoát"
             android:layout_weight="1"
             android:textColor="@color/white"
             android:backgroundTint="@android:color/holo_blue_dark"

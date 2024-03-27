@@ -79,7 +79,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class lapKeHoachChuyenDi extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener, TaiXeAdapter.itemListener, RecyclerViewAdapter.itemListener{
+public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClickListener, TaiXeAdapter.itemListener, RecyclerViewAdapter.itemListener{
 
     private EditText eThoiGianXuatPhat, eHour, eTaiXe, eXe, eXuatPhat, eDen;
     private MaterialSearchBar searchBarFrom, searchBarTo;
@@ -95,9 +95,9 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements OnMapReadyC
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlacesClient placesClient;
     private List<AutocompletePrediction> predictionList;
-    private LatLng from;
-    private LatLng to;
-    private Double distance;
+    private LatLng from, to;
+    private double distance;
+    private long time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,8 +114,6 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements OnMapReadyC
         searchBar(searchBarFrom);
         searchBar(searchBarTo);
 
-        //eXuatPhat = findViewById(R.id.edt_from);
-        //eDen =findViewById(R.id.edt_to);
         taiXe = new TaiXe();
         xe = new Xe();
 
@@ -330,10 +328,9 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements OnMapReadyC
                         long durationInSeconds = result.routes[0].legs[0].duration.inSeconds;
 
                         // Chuyển đổi đơn vị
-                        double distanceInKilometers = distanceInMeters / 1000.0;
-                        long durationInMinutes = TimeUnit.SECONDS.toMinutes(durationInSeconds);
-
-                        temp.setText(distanceInKilometers + " " + durationInMinutes );
+                        distance = distanceInMeters / 1000.0;
+                        time = TimeUnit.SECONDS.toMinutes(durationInSeconds);
+                        temp.setText(distance + "->" + time);
                     }
 
                     @Override
@@ -363,11 +360,7 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements OnMapReadyC
         String id = myRef.push().getKey();
 
 
-        // lay ra khoang cach giua 2 thang
-        distance = SphericalUtil.computeDistanceBetween(from, to);
-        //temp.setText(String.format("%.2f", distance / 1000) + "KM");
-
-        //tinhkhoang();
+        tinhkhoang();
 
         KeHoach keHoach = new KeHoach(
                 id,
@@ -377,7 +370,22 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements OnMapReadyC
                 xe,
                 taiXe
         );
-        keHoach.setKhoangCach(distance / 1000);
+        keHoach.setKhoangCach(distance);
+
+
+        if(xe.getLoaiXe() == "xe tai"){
+            // 10k cho 1km
+            double temp = distance * 10.0;
+            keHoach.setChiPhi(temp + "");
+        }
+        else if(xe.getLoaiXe() == "xe khach"){
+            double temp = distance * 13.0;
+            keHoach.setChiPhi(temp + "");
+        }
+        else if(xe.getLoaiXe() == "xe container"){
+            double temp = distance * 18.0;
+            keHoach.setChiPhi(temp + "");
+        }
 
         myRef.child(id).setValue(keHoach);
     }
@@ -519,9 +527,4 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements OnMapReadyC
         Toast.makeText(this, "chon xe thanh cong !", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-
-
-    }
 }

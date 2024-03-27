@@ -33,7 +33,8 @@
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_ten"
-                android:hint="Ten tai xe"
+                android:hint=" Tên Tài Xế"
+                android:drawableLeft="@drawable/menu_taixe"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:layout_width="match_parent"
@@ -48,7 +49,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_std"
                 android:inputType="phone"
-                android:hint="So Dien Thoai"
+                android:drawableLeft="@drawable/baseline_phone_24"
+                android:hint=" Số Điện Thoại"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:layout_width="match_parent"
@@ -62,7 +64,8 @@
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_dia_chi"
-                android:hint="Dia Chi"
+                android:drawableLeft="@drawable/diem_don_24"
+                android:hint=" Địa Chỉ"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:layout_width="match_parent"
@@ -76,7 +79,8 @@
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_giay_phep_lai_xe"
-                android:hint="giay phep lai xe"
+                android:drawableLeft="@drawable/giay_phep_lai_xe"
+                android:hint=" Giấy Phép Lái Xe"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:layout_width="match_parent"
@@ -94,7 +98,7 @@
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/btn_them"
-            android:text="Them"
+            android:text="thêm"
             android:layout_weight="1"
             android:backgroundTint="@android:color/holo_blue_dark"
             android:textColor="@color/white"
@@ -102,7 +106,7 @@
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/btn_thoat"
-            android:text="Thoat"
+            android:text="Thoát"
             android:layout_weight="1"
             android:textColor="@color/white"
             android:backgroundTint="@android:color/holo_blue_dark"
