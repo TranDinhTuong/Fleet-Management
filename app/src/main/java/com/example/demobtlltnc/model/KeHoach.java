@@ -2,12 +2,13 @@ package com.example.demobtlltnc.model;
 
 import com.example.demobtlltnc.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class KeHoach {
+public class KeHoach implements Serializable {
     private String id;
     private String xuatPhat;
     private String Den;
@@ -17,6 +18,8 @@ public class KeHoach {
     private String TinhTrangHienTai;
     private String chiPhi;
     private Double khoangCach;
+    private String thoiGianToi;
+
 
 
     public Map<String, Object> toMap(){
@@ -28,9 +31,17 @@ public class KeHoach {
         result.put("taiXe", taiXe);
         result.put("chiPhi", chiPhi);
         result.put("khoangCach", khoangCach);
+        result.put("thoiGianToi", thoiGianToi);
         return  result;
     }
 
+    public String getThoiGianToi() {
+        return thoiGianToi;
+    }
+
+    public void setThoiGianToi(String thoiGianToi) {
+        this.thoiGianToi = thoiGianToi;
+    }
 
     public String getId() {
         return id;
@@ -53,6 +64,7 @@ public class KeHoach {
         this.TinhTrangHienTai = "chưa bắt đầu";
         this.chiPhi = "0";
         this.khoangCach = 0.0;
+        this.chiPhi = "0";
     }
 
     public Double getKhoangCach() {

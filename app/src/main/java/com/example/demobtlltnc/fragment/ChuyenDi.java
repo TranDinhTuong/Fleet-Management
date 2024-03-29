@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.demobtlltnc.ChiTietKeHoach;
 import com.example.demobtlltnc.R;
 import com.example.demobtlltnc.adapter.KeHoachAdapter;
 import com.example.demobtlltnc.lapKeHoachChuyenDi;
@@ -127,7 +128,10 @@ public class ChuyenDi extends Fragment implements KeHoachAdapter.itemListener{
     @Override
     public void onItemClickKeHoach(View v, int postion) {
         KeHoach keHoach = mListKeHoach.get(postion);
-        openDialogChiTiet(keHoach);
+        Intent intent = new Intent(getContext(), ChiTietKeHoach.class);
+        intent.putExtra("ke hoach", keHoach);
+        startActivity(intent);
+        //openDialogChiTiet(keHoach);
     }
 
     private void openDialogChiTiet(KeHoach keHoach){

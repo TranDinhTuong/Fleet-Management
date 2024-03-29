@@ -1,9 +1,10 @@
 package com.example.demobtlltnc.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TaiXe{
+public class TaiXe implements Serializable {
 
     private String id;
     private String ten;

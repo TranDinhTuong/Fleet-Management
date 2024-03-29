@@ -111,8 +111,8 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
         searchBarTo = findViewById(R.id.search_diem_den);
         temp = findViewById(R.id.temp);
 
-        searchBar(searchBarFrom);
-        searchBar(searchBarTo);
+        searchbar(searchBarFrom);
+        searchbar(searchBarTo);
 
         taiXe = new TaiXe();
         xe = new Xe();
@@ -125,7 +125,7 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
 
     }
 
-    private void searchBar(MaterialSearchBar searchBar) {
+    private void searchbar(MaterialSearchBar searchBar) {
 
         final AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(lapKeHoachChuyenDi.this);
@@ -144,7 +144,11 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onButtonClicked(int buttonCode) {
-
+                if (buttonCode == MaterialSearchBar.BUTTON_NAVIGATION) {
+                    //opening or closing a navigation drawer
+                } else if (buttonCode == MaterialSearchBar.BUTTON_BACK) {
+                    searchBar.closeSearch();
+                }
             }
         });
 
@@ -177,16 +181,16 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
                                 searchBar.updateLastSuggestions(suggestionsList);
                                 if (!searchBar.isSuggestionsVisible()) {
                                     searchBar.showSuggestionsList();
+
                                 }
                             }
                         } else {
-                            Log.i("mytag", "prediction fetching task unsuccessful");
+                            Log.i("mytag", "loi " + task.getException());
                         }
                     }
                 });
 
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -235,7 +239,6 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
                             else{
                                 to = latLngOfPlace;
                             }
-
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -264,7 +267,6 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.edt_date){
-
             tinhkhoang();
 
             final Calendar c = Calendar.getInstance();
@@ -313,7 +315,7 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
     }
     private void tinhkhoang(){
         GeoApiContext context = new GeoApiContext.Builder()
-                .apiKey("AIzaSyAPd4jIf5Y0jv9hhQf3ZAhQwwJ0AXNF5nk")
+                .apiKey("AIzaSyCT8UEyZAkHhb-hUMuMbKutKYdy56hPJKo")
                 .build();
 
         DirectionsApi.newRequest(context)
@@ -371,18 +373,19 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
                 taiXe
         );
         keHoach.setKhoangCach(distance);
+        keHoach.setThoiGianToi(String.valueOf(time));
 
 
-        if(xe.getLoaiXe() == "xe tai"){
+        if(xe.getLoaiXe().equals("xe tai")){
             // 10k cho 1km
             double temp = distance * 10.0;
             keHoach.setChiPhi(temp + "");
         }
-        else if(xe.getLoaiXe() == "xe khach"){
+        else if(xe.getLoaiXe().equals("xe khach")){
             double temp = distance * 13.0;
             keHoach.setChiPhi(temp + "");
         }
-        else if(xe.getLoaiXe() == "xe container"){
+        else if(xe.getLoaiXe().equals("xe container")){
             double temp = distance * 18.0;
             keHoach.setChiPhi(temp + "");
         }

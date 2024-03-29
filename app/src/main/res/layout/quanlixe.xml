@@ -9,9 +9,9 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_marginTop="10dp"
-        app:iconifiedByDefault="false"
+        app:iconifiedByDefault="true"
         app:queryHint="tim xe theo bien so"
-        android:background="@color/white"
+        android:background="@drawable/search_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -30,6 +30,7 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
