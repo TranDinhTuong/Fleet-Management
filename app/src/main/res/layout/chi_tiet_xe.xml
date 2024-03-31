@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:orientation="vertical"
-    tools:context=".lapKeHoachChuyenDi">
-
-    <ImageButton
-        android:id="@+id/btn_thoat"
-        android:layout_gravity="end"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/cancel_background"
-        android:src="@drawable/cancel_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    tools:context=".themxe">
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,118 +16,112 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.mancj.materialsearchbar.MaterialSearchBar
-            android:id="@+id/search_diem_di"
-            style="@style/MaterialSearchBarLight"
-            app:mt_searchIconDrawable="@drawable/dia_diem_24"
-            app:mt_searchIconTint="#AA1A1A"
-            android:padding="5dp"
-            app:mt_speechMode="false"
-            app:mt_hint="diem xuat phat"
-            app:mt_maxSuggestionsCount="10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:mt_navIconEnabled="true"
-            android:elevation="5dp"
-            android:outlineProvider="bounds"
-            app:mt_placeholder="diem xuat phat"/>
-
-        <com.mancj.materialsearchbar.MaterialSearchBar
-            android:id="@+id/search_diem_den"
-            android:padding="5dp"
-            style="@style/MaterialSearchBarLight"
-            app:mt_searchIconDrawable="@drawable/diem_don_24"
-            app:mt_searchIconTint="#0092FE"
-            app:mt_speechMode="false"
-            app:mt_hint="diem den"
-            app:mt_maxSuggestionsCount="10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:mt_navIconEnabled="true"
-            android:elevation="5dp"
-            android:outlineProvider="bounds"
-            app:mt_placeholder="diem den"/>
-
-        <!--
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_from"
-                android:hint=" diem xuat phat"
-                android:drawableLeft="@drawable/dia_diem_24"
+                android:id="@+id/edt_bienso"
+                android:hint=" Biển Số"
+                android:enabled="false"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:padding="10dp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_to"
-                android:hint=" diem den"
-                android:drawableLeft="@drawable/diem_don_24"
+                android:id="@+id/edt_kichThuoc"
+                android:padding="10dp"
+                android:enabled="false"
+                android:hint=" Kích Thước"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
         </com.google.android.material.textfield.TextInputLayout>
-        -->
+
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_date"
-                android:hint=" Xuất Phát"
-                android:drawableLeft="@drawable/baseline_calendar_month_24"
+                android:id="@+id/edt_trongTai"
+                android:enabled="false"
+                android:hint=" Trọng Tải "
+                android:padding="10dp"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            app:hintEnabled="true"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_loai_xe"
+                android:enabled="false"
+                android:hint=" Loại Xe"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            app:hintEnabled="true"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_nhien_lieu"
+                android:enabled="false"
+                android:hint=" Loại Nhiên Liệu"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/edt_chon_tai_xe"
-                android:hint="chọn tài xế"
-                android:drawableLeft="@drawable/baseline_how_to_reg_24"
+                android:id="@+id/edt_lich_bao_duong"
+                android:hint=" Lịch Bảo Dưỡng "
+                android:enabled="false"
+                android:padding="10dp"
                 android:textColor="@color/black"
-                android:textSize="22sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            app:hintEnabled="true"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_chon_xe"
-                android:hint=" chọn xe"
-                android:inputType="none"
-                android:drawableLeft="@drawable/xe_24"
-                android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_them"
-        android:text="Them ke hoach"
-        android:layout_gravity="center"
+        android:id="@+id/btn_thoat"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="Thoát"
+        android:layout_gravity="center"
         android:textColor="@color/white"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
 </LinearLayout>

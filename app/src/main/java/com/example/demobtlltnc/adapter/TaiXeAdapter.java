@@ -43,7 +43,7 @@ public class TaiXeAdapter extends RecyclerView.Adapter<TaiXeAdapter.ViewHolder> 
         TaiXe taiXe = list.get(position);
 
         holder.iTen.setText(taiXe.getTen());
-        holder.iID.setText("ID: " + taiXe.getId());
+        holder.iID.setText("ID:" + taiXe.getId());
         holder.iTinhTrang.setText(taiXe.getTinhTrang());
         holder.iSoChuyen.setText("so chuyen: " + taiXe.getSoChuyenThanhCong());
     }

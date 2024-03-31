@@ -8,6 +8,15 @@
     android:orientation="vertical"
     tools:context=".themxe">
 
+    <ImageButton
+        android:id="@+id/btn_thoat"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/cancel_background"
+        android:src="@drawable/cancel_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <TextView
         android:text="Thêm Xe"
         android:textSize="18sp"
@@ -20,7 +29,6 @@
         android:layout_height="wrap_content"/>
     <LinearLayout
         android:orientation="vertical"
-        android:background="#DCDCDC"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -81,11 +89,11 @@
             android:layout_width="match_parent"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/edt_bienso"
                 android:hint=" Biển Số"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -96,12 +104,12 @@
             android:layout_width="match_parent"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/edt_kichThuoc"
                 android:inputType="phone"
                 android:hint=" Kích Thước"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -113,42 +121,42 @@
             android:layout_width="match_parent"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/edt_trongTai"
                 android:inputType="phone"
                 android:hint=" Trọng Tải "
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:hintEnabled="true"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edt_lich_bao_duong"
+                android:hint=" Lịch Bảo Dưỡng "
+                android:drawableRight="@drawable/calendar_icon"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:weightSum="2"
-        android:orientation="horizontal"
+    <Button
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_them"
-            android:text="Thêm"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/btn_thoat"
-            android:text="Thoát"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+        android:id="@+id/btn_them"
+        android:text="Thêm"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

@@ -8,24 +8,6 @@
     android:orientation="vertical"
     tools:context=".themtaixe">
 
-    <ImageButton
-        android:id="@+id/btn_thoat"
-        android:layout_gravity="end"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/cancel_background"
-        android:src="@drawable/cancel_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="Thêm Tài Xế"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:background="@drawable/color_background2"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     <LinearLayout
         android:orientation="vertical"
         android:layout_marginTop="20dp"
@@ -38,12 +20,14 @@
             android:layout_width="match_parent"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_ten"
-                android:hint=" Tên Tài Xế"
-                android:drawableLeft="@drawable/menu_taixe"
+            <EditText
+                android:id="@+id/edt_id"
+                android:hint=" ID Tài Xế"
+                android:drawableLeft="@drawable/id_icon"
+                android:enabled="false"
+                android:padding="10dp"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -51,15 +35,35 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            app:hintEnabled="true"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edt_ten"
+                android:hint=" Tên Tài Xế"
+                android:drawableLeft="@drawable/menu_taixe"
+                android:enabled="false"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_std"
-                android:inputType="phone"
-                android:drawableLeft="@drawable/baseline_phone_24"
                 android:hint=" Số Điện Thoại"
+                android:enabled="false"
+                android:drawableLeft="@drawable/baseline_phone_24"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:padding="10dp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -68,13 +72,16 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             app:hintEnabled="true"
+            android:layout_marginTop="20dp"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_dia_chi"
                 android:drawableLeft="@drawable/dia_chi_icon"
                 android:hint=" Địa Chỉ"
+                android:padding="10dp"
+                android:enabled="false"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -82,14 +89,17 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_giay_phep_lai_xe"
                 android:drawableLeft="@drawable/giay_phep_lai_xe"
+                android:padding="10dp"
+                android:enabled="false"
                 android:hint=" Giấy Phép Lái Xe"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -98,12 +108,12 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_them"
-        android:text="thêm"
-        android:layout_marginTop="20dp"
+        android:id="@+id/btn_thoat"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="Thoat"
         android:textColor="@color/white"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

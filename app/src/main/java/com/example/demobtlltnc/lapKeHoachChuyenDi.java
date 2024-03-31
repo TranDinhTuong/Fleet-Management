@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -37,6 +38,7 @@ import com.example.demobtlltnc.model.KeHoach;
 import com.example.demobtlltnc.model.QuanLyKeHoach;
 import com.example.demobtlltnc.model.TaiXe;
 import com.example.demobtlltnc.model.Xe;
+import com.example.demobtlltnc.model.firebase;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -79,13 +81,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClickListener, TaiXeAdapter.itemListener, RecyclerViewAdapter.itemListener{
+public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClickListener, TaiXeAdapter.itemListener, RecyclerViewAdapter.itemListener {
 
-    private EditText eThoiGianXuatPhat, eHour, eTaiXe, eXe, eXuatPhat, eDen;
+    private EditText eThoiGianXuatPhat, eTaiXe, eXe;
     private MaterialSearchBar searchBarFrom, searchBarTo;
-    private TextView temp;
-    private Button them, thoat;
-    private List<TaiXe> mList ;
+    private Button them;
+    private ImageButton thoat;
+    private List<TaiXe> mList;
     private List<Xe> ListXe;
     private Dialog dialog;
     private TaiXe taiXe;
@@ -98,6 +100,7 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
     private LatLng from, to;
     private double distance;
     private long time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +112,6 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
         thoat = findViewById(R.id.btn_thoat);
         searchBarFrom = findViewById(R.id.search_diem_di);
         searchBarTo = findViewById(R.id.search_diem_den);
-        temp = findViewById(R.id.temp);
 
         searchbar(searchBarFrom);
         searchbar(searchBarTo);
@@ -139,7 +141,7 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onSearchConfirmed(CharSequence text) {
-                startSearch(text.toString(), true, null , true);
+                startSearch(text.toString(), true, null, true);
             }
 
             @Override
@@ -191,6 +193,7 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
                 });
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -233,10 +236,9 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
                         LatLng latLngOfPlace = place.getLatLng();
 
                         if (latLngOfPlace != null) {
-                            if(searchBar.getId() == R.id.search_diem_di){
+                            if (searchBar.getId() == R.id.search_diem_di) {
                                 from = latLngOfPlace;
-                            }
-                            else{
+                            } else {
                                 to = latLngOfPlace;
                             }
                         }
@@ -266,7 +268,7 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.edt_date){
+        if (v.getId() == R.id.edt_date) {
             tinhkhoang();
 
             final Calendar c = Calendar.getInstance();
@@ -286,36 +288,30 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
                 public void onDateSet(DatePicker view, int y, int m, int d) {
                     String date = "";
 
-                    if(m > 8){
+                    if (m > 8) {
                         date = d + "/" + (m + 1) + "/" + y; //m may tinh tu 0->11 => can +1
-                    }else{
-                        date =  d + "/" +"0" + (m + 1) + "/" + y;
+                    } else {
+                        date = d + "/" + "0" + (m + 1) + "/" + y;
                     }
-                    eThoiGianXuatPhat.setText(" "+ date);
+                    eThoiGianXuatPhat.setText(" " + date);
                 }
-            },year,month,day);
+            }, year, month, day);
 
             dialog.show();
-        }
-        else if(v.getId() == R.id.edt_chon_tai_xe){
+        } else if (v.getId() == R.id.edt_chon_tai_xe) {
             openDialogChonTaiXe();
-        }
-        else if(v.getId() == R.id.edt_chon_xe){
+        } else if (v.getId() == R.id.edt_chon_xe) {
             openDialogChonXe();
-        }
-        else if(v.getId() == R.id.btn_them){
+        } else if (v.getId() == R.id.btn_them) {
             openMethodThem();
-            taiXe.setSoChuyenThanhCong(taiXe.getSoChuyenThanhCong() + 1);
-            finish();
-        }
-        else if(v.getId() == R.id.btn_thoat){
-
+        } else if (v.getId() == R.id.btn_thoat) {
             finish();
         }
     }
-    private void tinhkhoang(){
+
+    private void tinhkhoang() {
         GeoApiContext context = new GeoApiContext.Builder()
-                .apiKey("AIzaSyCT8UEyZAkHhb-hUMuMbKutKYdy56hPJKo")
+                .apiKey("AIzaSyAkjueH60kK3_bCb4WQj2JecAp5Ua4WNUY")
                 .build();
 
         DirectionsApi.newRequest(context)
@@ -332,7 +328,6 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
                         // Chuyển đổi đơn vị
                         distance = distanceInMeters / 1000.0;
                         time = TimeUnit.SECONDS.toMinutes(durationInSeconds);
-                        temp.setText(distance + "->" + time);
                     }
 
                     @Override
@@ -344,24 +339,24 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
 
     private void openMethodThem() {
 
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("ke hoach");
-
-
+        if (eThoiGianXuatPhat.getText().toString().length() == 0
+                || eXe.getText().toString().length() == 0
+                || eTaiXe.getText().toString().length() == 0
+                || searchBarFrom.getText().length() == 0
+                || searchBarTo.getText().length() == 0) {
+            Toast.makeText(this, "phải nhập đầy đủ các trường", Toast.LENGTH_SHORT).show();
+            return;
+        }
         taiXe.setTinhTrang(getResources().getStringArray(R.array.tinhtrangTaiXe)[0]);// tinh trạng tài xế = trong chuyến
-        FirebaseDatabase db1 = FirebaseDatabase.getInstance();
-        DatabaseReference upTaiXe = database.getReference("tai xe").child(taiXe.getId());
-        upTaiXe.updateChildren(taiXe.toMap());
+        firebase db1 = new firebase("tai xe");
+        db1.update(taiXe.getId(), taiXe.toMap());
 
         xe.setTinhTrangXe(getResources().getStringArray(R.array.tinhtrang)[0]);//tinh trang xe = đang hoạt động
-        FirebaseDatabase db2 = FirebaseDatabase.getInstance();
-        DatabaseReference upXe = database.getReference("xe").child(xe.getBienSo());
-        upXe.updateChildren(xe.toMap());
+        firebase db2 = new firebase("xe");
+        db2.update(xe.getBienSo(), xe.toMap());
 
-        String id = myRef.push().getKey();
-
-
+        firebase db = new firebase("ke hoach");
+        String id = db.getMyRef().push().getKey();
         tinhkhoang();
 
         KeHoach keHoach = new KeHoach(
@@ -376,21 +371,20 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
         keHoach.setThoiGianToi(String.valueOf(time));
 
 
-        if(xe.getLoaiXe().equals("xe tai")){
+        if (xe.getLoaiXe().equals("xe tai")) {
             // 10k cho 1km
             double temp = distance * 10.0;
             keHoach.setChiPhi(temp + "");
-        }
-        else if(xe.getLoaiXe().equals("xe khach")){
+        } else if (xe.getLoaiXe().equals("xe khach")) {
             double temp = distance * 13.0;
             keHoach.setChiPhi(temp + "");
-        }
-        else if(xe.getLoaiXe().equals("xe container")){
+        } else if (xe.getLoaiXe().equals("xe container")) {
             double temp = distance * 18.0;
             keHoach.setChiPhi(temp + "");
         }
-
-        myRef.child(id).setValue(keHoach);
+        taiXe.setSoChuyenThanhCong(taiXe.getSoChuyenThanhCong() + 1);
+        db.getMyRef().child(id).setValue(keHoach);
+        finish();
     }
 
     private String getCurDate() {
@@ -400,55 +394,33 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         String dayCur = "";
-        if(month > 8){
+        if (month > 8) {
             dayCur = day + "/" + (month + 1) + "/" + year; //m may tinh tu 0->11 => can +1
-        }else{
-            dayCur =  day + "/" +"0" + (month + 1) + "/" + year;
+        } else {
+            dayCur = day + "/" + "0" + (month + 1) + "/" + year;
         }
         return dayCur;
     }
 
-    private void openDialogChonTaiXe(){
+    private void openDialogChonTaiXe() {
         dialog = new Dialog(lapKeHoachChuyenDi.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.chon_tai_xe);
         Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        //window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
 
         RecyclerView recyclerView = dialog.findViewById(R.id.recyclerView);
         mList = new ArrayList<>();
         TaiXeAdapter adapter = new TaiXeAdapter(mList);
+
+        firebase db = new firebase("tai xe");
+        mList = db.getListTaiXeByTinhTrang();
+
         adapter.setList(mList);
         recyclerView.setLayoutManager(new LinearLayoutManager(lapKeHoachChuyenDi.this, RecyclerView.VERTICAL, false));
         adapter.setItemListener(this);
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("tai xe");
-        Query query = myRef.orderByChild("tinhTrang").equalTo("dang ranh");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot i : snapshot.getChildren()){
-                    TaiXe taiXe = i.getValue(TaiXe.class);
-                    mList.add(taiXe);
-                }
-
-                if(mList.size() == 0){
-                    Toast.makeText(lapKeHoachChuyenDi.this, "thật tiếc không có tài xế nào rảnh", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                    finish();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
 
         recyclerView.setAdapter(adapter);
 
@@ -462,49 +434,27 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
         dialog.show();
     }
 
-     void openDialogChonXe(){
+    void openDialogChonXe() {
         dialog = new Dialog(lapKeHoachChuyenDi.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.chon_tai_xe);
         Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        //window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
 
         RecyclerView recyclerView = dialog.findViewById(R.id.recyclerView);
         ListXe = new ArrayList<>();
+
+        //get data
+        firebase db = new firebase("xe");
+        ListXe = db.getListXeByTinhTrang();
+
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(ListXe);
         adapter.setList(ListXe);
         recyclerView.setLayoutManager(new LinearLayoutManager(lapKeHoachChuyenDi.this, RecyclerView.VERTICAL, false));
         adapter.setItemListener(this);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("xe");
-        Query query = myRef.orderByChild("tinhTrangXe").equalTo("không hoạt động");
-
-
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot i : snapshot.getChildren()){
-                    Xe xe = i.getValue(Xe.class);
-                    ListXe.add(xe);
-                }
-
-                if(ListXe.size() == 0){
-                    Toast.makeText(lapKeHoachChuyenDi.this, "thật tiếc không có xe nào rảnh", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                    finish();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         recyclerView.setAdapter(adapter);
-
-
 
         Button button = dialog.findViewById(R.id.btn_thoat);
         button.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package com.example.demobtlltnc.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +23,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DoanSo extends Fragment {
     private BarChart barChart;
     private BarDataSet barDataSet1, barDataSet2;
-    ArrayList barEntries;
+    List<BarEntry> barEntries;
     String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Oct","Nov","Dec"};
     @Nullable
     @Override
@@ -120,24 +123,26 @@ public class DoanSo extends Fragment {
         // our bar chart.
         barChart.invalidate();
     }
-    private ArrayList<BarEntry> getBarEntriesOne() {
+    private List<BarEntry> getBarEntriesOne() {
 
         // creating a new array list
         barEntries = new ArrayList<>();
 
         // adding new entry to our array list with bar
         // entry and passing x and y axis value to it.
-        /*FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("ke hoach");
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        /*myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                float i = 0;
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     KeHoach temp = dataSnapshot.getValue(KeHoach.class);
                     if(temp != null){
-                        barEntries.add(new BarEntry(1f, Integer.parseInt(temp.getChiPhi()) ));
+
                     }
+                    i++;
                 }
             }
 
@@ -146,10 +151,11 @@ public class DoanSo extends Fragment {
 
             }
         });*/
-        barEntries.add(new BarEntry(1f, null));
-        barEntries.add(new BarEntry(2f, null));
+
+        barEntries.add(new BarEntry(1f, 0));
+        barEntries.add(new BarEntry(2f, 0));
         barEntries.add(new BarEntry(3f, 8));
-        barEntries.add(new BarEntry(4f, 2));
+        barEntries.add(new BarEntry(4f, 2.44F));
         barEntries.add(new BarEntry(5f, 4));
         barEntries.add(new BarEntry(6f, 1));
         barEntries.add(new BarEntry(7f, 4));
@@ -158,10 +164,10 @@ public class DoanSo extends Fragment {
         barEntries.add(new BarEntry(10f, 2));
         barEntries.add(new BarEntry(11f, 4));
         barEntries.add(new BarEntry(12f, 1));
-        //tuong ứng với 12 thang
+        //tuong ứng với 12 thang*/
         return barEntries;
     }
-    private ArrayList<BarEntry> getBarEntriesTwo() {
+    private List<BarEntry> getBarEntriesTwo() {
 
         // creating a new array list
         barEntries = new ArrayList<>();

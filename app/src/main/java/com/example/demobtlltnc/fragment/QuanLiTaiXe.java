@@ -1,6 +1,8 @@
 package com.example.demobtlltnc.fragment;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,11 +28,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.demobtlltnc.ChiTietKeHoach;
 import com.example.demobtlltnc.R;
 import com.example.demobtlltnc.adapter.TaiXeAdapter;
 import com.example.demobtlltnc.model.DoiTaiXe;
 import com.example.demobtlltnc.model.TaiXe;
 import com.example.demobtlltnc.model.Xe;
+import com.example.demobtlltnc.model.firebase;
 import com.example.demobtlltnc.themtaixe;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -180,7 +185,7 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
 
         Button btnCapNhat = dialog.findViewById(R.id.btn_update);
         Button btnXoa = dialog.findViewById(R.id.btn_remove);
-        Button btnThoat = dialog.findViewById(R.id.btn_thoat);
+        ImageButton btnThoat = dialog.findViewById(R.id.btn_thoat);
 
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,15 +218,26 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase db = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = db.getReference("tai xe");
-
-                myRef.child(taiXe.getId()).removeValue(new DatabaseReference.CompletionListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Thong bao xoa");
+                builder.setIcon(R.drawable.cancel_ic);
+                builder.setMessage("Ban co muon xoa  khong ?");
+                builder.setPositiveButton("Co", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                    public void onClick(DialogInterface d, int which) {
+                        firebase db = new firebase("tai xe");
+                        db.getMyRef().child(taiXe.getId()).removeValue();
                         dialog.dismiss();
                     }
                 });
+                builder.setNegativeButton("Khong", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface d, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
         dialog.show();

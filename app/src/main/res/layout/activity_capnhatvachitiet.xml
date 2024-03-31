@@ -5,69 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".capnhatvachitiet">
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/cancel_background"
+        android:src="@drawable/cancel_icon" />
+
     <LinearLayout
-        android:background="#03A9F4"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="80dp"
+        android:background="#03A9F4"
+        android:orientation="vertical">
+
         <TextView
-            android:text="Cap nhat / Xoa"
-            android:textSize="22sp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Cap nhat / Xoa"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
         <TextView
             android:id="@+id/txt_bien_so"
-            android:text="bien so"
-            android:textSize="22sp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="bien so"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="vertical"
-        android:background="#DCDCDC"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="loại xe: "
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textSize="16sp" />
+
             <Spinner
                 android:id="@+id/spinner_loaixe"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="loại nhiên : "
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textSize="16sp" />
+
             <Spinner
                 android:id="@+id/spinner_loainhienlieu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,102 +93,90 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="tình trang: "
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textSize="16sp" />
+
             <Spinner
                 android:id="@+id/spinner_tinhTrang"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="kich thuoc : "
-                android:textColor="@color/black"
-                android:layout_gravity="center"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <EditText
+            android:layout_marginTop="10dp"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_kichThuoc"
-                android:inputType="number"
-                android:layout_marginTop="10dp"
-                android:textColorHint="@color/black"
-                android:textSize="22sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:hint=" Kích Thước"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="trong tai : "
-                android:textColor="@color/black"
-                android:layout_gravity="center"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <EditText
+            android:layout_marginTop="10dp"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_trongTai"
-                android:layout_marginTop="10dp"
-                android:textColorHint="@color/black"
-                android:inputType="number"
-                android:textSize="22sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:hint=" Trọng Tải "
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            app:hintEnabled="true">
+            <EditText
+                android:id="@+id/edt_lich_bao_duong"
+                android:drawableRight="@drawable/calendar_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=" Lịch Bảo Dưỡng "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:weightSum="3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.cardview.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:cardCornerRadius="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/update"
-                android:backgroundTint="@android:color/holo_blue_dark"
-                android:text = "Cap Nhat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="Cap Nhat" />
+
+        <Button
+            android:id="@+id/remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:cardCornerRadius="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/remove"
-                android:text="Xoa"
-                android:backgroundTint="@android:color/holo_blue_dark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_weight="1"
-            app:cardCornerRadius="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/back"
-                android:text="Quay Lai"
-                android:backgroundTint="@android:color/holo_blue_dark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </androidx.cardview.widget.CardView>
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="Xoa" />
     </LinearLayout>
 </LinearLayout>

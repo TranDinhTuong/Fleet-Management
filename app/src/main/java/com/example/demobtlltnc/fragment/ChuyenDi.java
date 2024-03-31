@@ -109,7 +109,19 @@ public class ChuyenDi extends Fragment implements KeHoachAdapter.itemListener{
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                KeHoach keHoach = snapshot.getValue(KeHoach.class);
+                if(keHoach == null || mListKeHoach.isEmpty()){
+                    return;
+                }
 
+                for(int i = 0; i < mListKeHoach.size(); i++){
+                    KeHoach temp = mListKeHoach.get(i);
+                    if(keHoach.getId().equalsIgnoreCase(temp.getId())){
+                        mListKeHoach.remove(i);
+                        break;
+                    }
+                }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

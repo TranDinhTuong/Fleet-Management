@@ -8,7 +8,6 @@
     <LinearLayout
         android:orientation="horizontal"
         android:weightSum="2"
-        android:background="#E91E63"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -20,7 +19,7 @@
             <TextView
                 android:id="@+id/iTen"
                 android:text="tran dinh tuong"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_width="wrap_content"
@@ -28,7 +27,8 @@
             <TextView
                 android:id="@+id/iID"
                 android:text="ID : 0183838"
-                android:textColor="@color/white"
+                android:maxLines="1"
+                android:textColor="@color/black"
                 android:textSize="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -43,7 +43,7 @@
                 android:id="@+id/txt_tinh_trang"
                 android:text="Trong chuyen"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -51,7 +51,7 @@
                 android:id="@+id/txt_soChuyen"
                 android:text="so chuyen: 10"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

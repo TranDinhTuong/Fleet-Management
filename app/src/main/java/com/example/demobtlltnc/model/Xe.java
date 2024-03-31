@@ -11,9 +11,18 @@ public class Xe implements Serializable {
     private String loaiNhienLieu;
     private String tinhTrangXe;
     private String LoaiXe;
+    private String lichBaoDuong;
 
 
     public Xe() {
+    }
+
+    public String getLichBaoDuong() {
+        return lichBaoDuong;
+    }
+
+    public void setLichBaoDuong(String lichBaoDuong) {
+        this.lichBaoDuong = lichBaoDuong;
     }
 
     public String getBienSo() {
@@ -64,15 +73,15 @@ public class Xe implements Serializable {
         LoaiXe = loaiXe;
     }
 
-    public Xe(String bienSo, String kichThuoc, String trongTai, String loaiNhienLieu, String tinhTrangXe, String loaiXe) {
+    public Xe(String bienSo, String kichThuoc, String trongTai, String loaiNhienLieu, String tinhTrangXe, String loaiXe, String lichBaoDuong) {
         this.bienSo = bienSo;
         this.kichThuoc = kichThuoc;
         this.trongTai = trongTai;
         this.loaiNhienLieu = loaiNhienLieu;
         this.tinhTrangXe = tinhTrangXe;
         this.LoaiXe = loaiXe;
+        this.lichBaoDuong = lichBaoDuong;
     }
-
 
     public Map<String, Object> toMap(){
         Map<String, Object> result = new HashMap<>();
@@ -81,6 +90,7 @@ public class Xe implements Serializable {
         result.put("loaiNhienLieu", loaiNhienLieu);
         result.put("tinhTrangXe", tinhTrangXe);
         result.put("LoaiXe", LoaiXe);
+        result.put("lichBaoDuong", lichBaoDuong);
         return  result;
     }
 

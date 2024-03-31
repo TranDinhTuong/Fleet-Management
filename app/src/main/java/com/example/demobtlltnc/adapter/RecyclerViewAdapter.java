@@ -1,8 +1,10 @@
 package com.example.demobtlltnc.adapter;
 
+import android.icu.text.SimpleDateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +14,9 @@ import com.example.demobtlltnc.R;
 import com.example.demobtlltnc.model.Xe;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private List<Xe> list;
@@ -47,6 +51,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.iBienSo.setText("Bien So: " + xe.getBienSo() );
         holder.iLoaiXe.setText("Loai xe: " + xe.getLoaiXe());
         holder.iTinhTrang.setText(xe.getTinhTrangXe());
+
+        // den ngay bao duong thi thong bao
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        if(xe.getLichBaoDuong().equalsIgnoreCase(dateFormat.format(date))){
+            holder.layout.setBackgroundColor(R.color.red);
+        }
     }
 
     @Override
@@ -56,12 +67,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView iLoaiXe,iBienSo, iTinhTrang;
+        private LinearLayout layout;
 
         public ViewHolder(@NonNull View v) {
             super(v);
             iLoaiXe = v.findViewById(R.id.iLoaiXe);
             iTinhTrang = v.findViewById(R.id.iTinhTrang);
             iBienSo = v.findViewById(R.id.iBienSo);
+            layout = v.findViewById(R.id.layout);
             v.setOnClickListener(this);
         }
 

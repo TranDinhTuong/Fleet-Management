@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.demobtlltnc.model.TaiXe;
@@ -20,7 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class themtaixe extends AppCompatActivity implements View.OnClickListener{
 
     private EditText eTen, eSdt, eDiaChi, eGiayPhepLaiXe;
-    private Button them, thoat;
+    private Button them;
+    private ImageButton thoat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

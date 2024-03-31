@@ -1,22 +1,37 @@
 package com.example.demobtlltnc;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.demobtlltnc.model.KeHoach;
+import com.example.demobtlltnc.model.TaiXe;
+import com.example.demobtlltnc.model.Xe;
+import com.example.demobtlltnc.model.firebase;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ChiTietKeHoach extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText tvDiemDi, tvDiemDen, tvQuangDuong,tvChiPhi,tvThoiGianUocTinh,tvTaiXe,tvXe;
-    private TextView tvThoiGian;
+    private EditText tvDiemDi, tvDiemDen, tvQuangDuong,tvChiPhi,tvThoiGianUocTinh;
+    private TextView tvThoiGian, tvTaiXe,tvXe;
+    private Button xoa;
+    private ImageButton thoat;
     private KeHoach keHoach;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +41,10 @@ public class ChiTietKeHoach extends AppCompatActivity implements View.OnClickLis
 
         tvTaiXe.setOnClickListener(this);
         tvXe.setOnClickListener(this);
+        thoat.setOnClickListener(this);
+        xoa.setOnClickListener(this);
     }
 
-    private void initData() {
-
-    }
 
     private void initView() {
         tvDiemDi = findViewById(R.id.tv_diem_di);
@@ -41,6 +55,8 @@ public class ChiTietKeHoach extends AppCompatActivity implements View.OnClickLis
         tvThoiGianUocTinh = findViewById(R.id.tv_thoi_gian_uoc_tinh);
         tvTaiXe = findViewById(R.id.tv_tai_xe);
         tvXe = findViewById(R.id.tv_xe);
+        thoat = findViewById(R.id.btn_thoat);
+        xoa = findViewById(R.id.btn_remove);
 
         Intent i = getIntent();
         keHoach = (KeHoach) i.getSerializableExtra("ke hoach");
@@ -50,9 +66,7 @@ public class ChiTietKeHoach extends AppCompatActivity implements View.OnClickLis
         tvQuangDuong.setText(" " + keHoach.getKhoangCach().toString() + " Km");
         tvChiPhi.setText(" " + keHoach.getChiPhi() + "VND");
         tvThoiGian.setText(" " + keHoach.getThoiGianXuatPhat());
-        tvThoiGianUocTinh.setText(keHoach.getThoiGianToi() + " Phut");
-        tvTaiXe.setText(keHoach.getTaiXe().getTen().trim());
-        tvXe.setText(keHoach.getXe().getLoaiXe());
+        tvThoiGianUocTinh.setText(" " + keHoach.getThoiGianToi() + " Phut");
     }
 
     @Override
@@ -60,13 +74,109 @@ public class ChiTietKeHoach extends AppCompatActivity implements View.OnClickLis
         if(v.getId() == R.id.tv_tai_xe){
             final Dialog dialog = new Dialog(this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.capnhat_chitiet_taixe);
+            dialog.setContentView(R.layout.chitiet_taixe);
             Window window = dialog.getWindow();
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
             //window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.setCancelable(false);
 
+            EditText id = dialog.findViewById(R.id.edt_id);
+            EditText ten = dialog.findViewById(R.id.edt_ten);
+            EditText diaChi = dialog.findViewById(R.id.edt_dia_chi);
+            EditText sdt = dialog.findViewById(R.id.edt_std);
+            EditText giayPhep = dialog.findViewById(R.id.edt_giay_phep_lai_xe);
+
+            TaiXe taiXe = keHoach.getTaiXe();
+            id.setText(" " + taiXe.getId());
+            ten.setText(" " +taiXe.getTen());
+            diaChi.setText(" " +taiXe.getDiaChi());
+            sdt.setText(" " +taiXe.getSoDienThoai());
+            giayPhep.setText(" " +taiXe.getGiayPhepLaiXe());
+
+            Button thoat = dialog.findViewById(R.id.btn_thoat);
+            thoat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
             dialog.show();
+        }
+        else if(v.getId() == R.id.tv_xe){
+
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.chi_tiet_xe);
+            Window window = dialog.getWindow();
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            //window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setCancelable(false);
+
+            EditText bienSo = dialog.findViewById(R.id.edt_bienso);
+            EditText kichThuoc = dialog.findViewById(R.id.edt_kichThuoc);
+            EditText trongTai = dialog.findViewById(R.id.edt_trongTai);
+            EditText loaiXe = dialog.findViewById(R.id.edt_loai_xe);
+            EditText loaiNhienLieu = dialog.findViewById(R.id.edt_nhien_lieu);
+            EditText lichBaoDuong = dialog.findViewById(R.id.edt_lich_bao_duong);
+
+            Xe xe = keHoach.getXe();
+            bienSo.setText(" " + xe.getBienSo());
+            kichThuoc.setText(" " +xe.getKichThuoc());
+            trongTai.setText(" " +xe.getTrongTai());
+            loaiXe.setText(" " +xe.getLoaiXe());
+            loaiNhienLieu.setText(" " +xe.getLoaiNhienLieu());
+            lichBaoDuong.setText(xe.getLichBaoDuong());
+
+            Button thoat = dialog.findViewById(R.id.btn_thoat);
+            thoat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+        else if(v.getId() == R.id.btn_remove){
+            //chuyen ve trang thai dang ranh va ko hoat dong
+            TaiXe taiXe = keHoach.getTaiXe();
+            taiXe.setTinhTrang("dang ranh");
+            firebase d1 = new firebase("tai xe");
+            d1.update(taiXe.getId(), taiXe.toMap());
+
+            Xe xe = keHoach.getXe();
+            xe.setTinhTrangXe("không hoạt động");
+            firebase d2 = new firebase("xe");
+            d2.update(xe.getBienSo(), taiXe.toMap());
+            //cap nhat tren firebase
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("Thong bao xoa");
+            builder.setIcon(R.drawable.cancel_ic);
+            builder.setMessage("Ban co muon xoa  khong ?");
+            builder.setPositiveButton("Co", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    firebase db = new firebase("ke hoach");
+                    db.getMyRef().child(keHoach.getId()).removeValue(new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                            Toast.makeText(ChiTietKeHoach.this, "xoa thanh cong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    finish();
+                }
+            });
+            builder.setNegativeButton("Khong", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else if(v.getId() == R.id.btn_thoat){
+            finish();
         }
     }
 }

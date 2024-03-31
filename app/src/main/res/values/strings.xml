@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">demobtlLTNC</string>
-    <string name="api">AIzaSyCT8UEyZAkHhb-hUMuMbKutKYdy56hPJKo</string>
+    <string name="api">AIzaSyAkjueH60kK3_bCb4WQj2JecAp5Ua4WNUY</string>
     <string-array name="loaixe">
         <item> xe tai</item>
         <item> xe khach</item>
         <item> xe container</item>
+    </string-array>
+
+    <string-array name="loaixeFilter">
+        <item>tất cả</item>
+        <item>xe tai</item>
+        <item>xe khach</item>
+        <item>xe container</item>
     </string-array>
 
     <string-array name="loainhienlieu">

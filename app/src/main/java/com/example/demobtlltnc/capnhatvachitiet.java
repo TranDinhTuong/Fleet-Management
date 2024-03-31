@@ -5,13 +5,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +27,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class capnhatvachitiet extends AppCompatActivity implements View.OnClickListener{
     private Spinner loaiXe, loaiNhienLieu, tinhTrangXe;
-    private EditText bienSo, kichThuoc, trongTai;
+    private EditText bienSo, kichThuoc, trongTai, lichBaoDuong;
     private TextView tBienSo;
-    private Button capNhat, Xoa, quayLai;
+    private Button capNhat, Xoa;
+    private ImageButton quayLai;
     private Xe xe;
 
     @Override
@@ -49,6 +55,7 @@ public class capnhatvachitiet extends AppCompatActivity implements View.OnClickL
         Xoa = findViewById(R.id.remove);
         quayLai = findViewById(R.id.back);
         tBienSo = findViewById(R.id.txt_bien_so);
+        lichBaoDuong = findViewById(R.id.edt_lich_bao_duong);
 
         setSpinner();
 
@@ -58,6 +65,7 @@ public class capnhatvachitiet extends AppCompatActivity implements View.OnClickL
 
         kichThuoc.setText(xe.getKichThuoc());
         trongTai.setText(xe.getTrongTai());
+        lichBaoDuong.setText(xe.getLichBaoDuong());
 
         setSpinnerLoaiXe(xe);
         setSpinnerNhienLieu(xe);
@@ -66,6 +74,7 @@ public class capnhatvachitiet extends AppCompatActivity implements View.OnClickL
         capNhat.setOnClickListener(this);
         Xoa.setOnClickListener(this);
         quayLai.setOnClickListener(this);
+        lichBaoDuong.setOnClickListener(this);
 
     }
     private void setSpinnerLoaiXe(Xe xe){
@@ -148,7 +157,30 @@ public class capnhatvachitiet extends AppCompatActivity implements View.OnClickL
             });
             AlertDialog dialog = builder.create();
             dialog.show();
-        }else{
+        }
+        else if(v.getId() == R.id.edt_lich_bao_duong){
+            final Calendar c = Calendar.getInstance();
+
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog dialog = new DatePickerDialog(capnhatvachitiet.this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int y, int m, int d) {
+                    String date = "";
+
+                    if (m > 8) {
+                        date = d + "/" + (m + 1) + "/" + y; //m may tinh tu 0->11 => can +1
+                    } else {
+                        date = d + "/" + "0" + (m + 1) + "/" + y;
+                    }
+                    lichBaoDuong.setText(" " + date);
+                }
+            }, year, month, day);
+            dialog.show();
+        }
+        else{
             finish();
         }
     }
