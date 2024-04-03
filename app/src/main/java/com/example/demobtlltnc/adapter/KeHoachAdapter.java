@@ -1,5 +1,6 @@
 package com.example.demobtlltnc.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.example.demobtlltnc.R;
 import com.example.demobtlltnc.model.KeHoach;
 import com.example.demobtlltnc.model.TaiXe;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class KeHoachAdapter extends RecyclerView.Adapter<KeHoachAdapter.ViewHolder> {
@@ -43,8 +45,20 @@ public class KeHoachAdapter extends RecyclerView.Adapter<KeHoachAdapter.ViewHold
 
         holder.iDi.setText(keHoach.getXuatPhat());
         holder.iDen.setText("=> " + keHoach.getDen());
-        holder.iTinhTrang.setText(keHoach.getTinhTrangHienTai());
         holder.iThoiGian.setText(keHoach.getThoiGianXuatPhat());
+
+        // Lấy thời gian hiện tại
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24 giờ
+        int minute = calendar.get(Calendar.MINUTE);
+        int thoiGianUocTinh = Integer.parseInt(keHoach.getThoiGianToi());
+
+        int hours = thoiGianUocTinh / 60; // Lấy phần nguyên
+        int minutes = thoiGianUocTinh % 60; // Lấy phần dư
+
+        Log.e("time", hours + " " + minutes);
+        holder.iTinhTrang.setText(keHoach.getTinhTrangHienTai());
     }
 
     @Override

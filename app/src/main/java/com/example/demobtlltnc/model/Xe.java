@@ -73,12 +73,12 @@ public class Xe implements Serializable {
         LoaiXe = loaiXe;
     }
 
-    public Xe(String bienSo, String kichThuoc, String trongTai, String loaiNhienLieu, String tinhTrangXe, String loaiXe, String lichBaoDuong) {
+    public Xe(String bienSo, String kichThuoc, String trongTai, String loaiNhienLieu, String loaiXe, String lichBaoDuong) {
         this.bienSo = bienSo;
         this.kichThuoc = kichThuoc;
         this.trongTai = trongTai;
         this.loaiNhienLieu = loaiNhienLieu;
-        this.tinhTrangXe = tinhTrangXe;
+        this.tinhTrangXe = "không hoạt động";
         this.LoaiXe = loaiXe;
         this.lichBaoDuong = lichBaoDuong;
     }

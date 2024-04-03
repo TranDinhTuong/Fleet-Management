@@ -10,8 +10,8 @@
         android:id="@+id/searchView"
         android:layout_marginTop="10dp"
         app:iconifiedByDefault="false"
-        app:queryHint="tìm kiếm tài xe"
-        android:background="@color/white"
+        app:queryHint="tìm tai xế theo tên"
+        android:background="@drawable/search_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

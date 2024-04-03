@@ -34,16 +34,31 @@
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="tinh trang: "
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Spinner
+                android:id="@+id/sp_tinhTrang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             app:hintEnabled="true"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_ten"
                 android:hint="Ten tai xe"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -58,7 +73,7 @@
                 android:inputType="phone"
                 android:hint="So Dien Thoai"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -72,7 +87,7 @@
                 android:id="@+id/edt_dia_chi"
                 android:hint="Dia Chi"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -86,28 +101,20 @@
                 android:id="@+id/edt_giay_phep_lai_xe"
                 android:hint="giay phep lai xe"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:layout_marginTop="10dp"
+        <TextView
+            android:id="@+id/tv_lich_su_tai_xe"
+            android:drawableRight="@drawable/mui_ten_icon"
+            android:text="xem lich su lái xe"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="tinh trang: "
-                android:textSize="22sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <Spinner
-                android:id="@+id/sp_tinhTrang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout

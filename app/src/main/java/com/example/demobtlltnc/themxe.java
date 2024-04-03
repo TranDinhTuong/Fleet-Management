@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -28,11 +29,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class themxe extends AppCompatActivity implements View.OnClickListener {
 
-    private Spinner loaiXe, loaiNhienLieu, tinhTrangXe;
+    private Spinner loaiXe, loaiNhienLieu;
     private EditText bienSo, kichThuoc, trongTai, lichBaoDuong;
     private Button them;
     private ImageButton thoat;
@@ -59,13 +62,11 @@ public class themxe extends AppCompatActivity implements View.OnClickListener {
     private void setSpinner() {
         loaiXe.setAdapter(new ArrayAdapter<String>(this, R.layout.item_spinner, getResources().getStringArray(R.array.loaixe)));
         loaiNhienLieu.setAdapter(new ArrayAdapter<String>(this, R.layout.item_spinner, getResources().getStringArray(R.array.loainhienlieu)));
-        tinhTrangXe.setAdapter(new ArrayAdapter<String>(this, R.layout.item_spinner, getResources().getStringArray(R.array.tinhtrang)));
     }
 
     private void initView() {
         loaiXe = findViewById(R.id.spinner_loaixe);
         loaiNhienLieu = findViewById(R.id.spinner_loainhienlieu);
-        tinhTrangXe = findViewById(R.id.spinner_tinhTrang);
         bienSo = findViewById(R.id.edt_bienso);
         kichThuoc = findViewById(R.id.edt_kichThuoc);
         trongTai = findViewById(R.id.edt_trongTai);
@@ -82,12 +83,11 @@ public class themxe extends AppCompatActivity implements View.OnClickListener {
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-
+            
             DatePickerDialog dialog = new DatePickerDialog(themxe.this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int y, int m, int d) {
                     String date = "";
-
                     if (m > 8) {
                         date = d + "/" + (m + 1) + "/" + y; //m may tinh tu 0->11 => can +1
                     } else {
@@ -104,7 +104,6 @@ public class themxe extends AppCompatActivity implements View.OnClickListener {
                     kichThuoc.getText().toString(),
                     trongTai.getText().toString(),
                     loaiNhienLieu.getSelectedItem().toString(),
-                    tinhTrangXe.getSelectedItem().toString(),
                     loaiXe.getSelectedItem().toString(),
                     lichBaoDuong.getText().toString()
             );

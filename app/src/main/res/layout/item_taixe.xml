@@ -8,6 +8,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:weightSum="2"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

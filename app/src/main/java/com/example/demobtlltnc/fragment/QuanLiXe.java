@@ -76,7 +76,7 @@ public class QuanLiXe extends Fragment implements RecyclerViewAdapter.itemListen
         btnAddXe = view.findViewById(R.id.btn_add_xe);
         filter = view.findViewById(R.id.filter);
 
-        filter.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.item_spinner, getResources().getStringArray(R.array.loaixeFilter)));
+        //filter.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.item_spinner, getResources().getStringArray(R.array.loaixeFilter)));
 
 
 
@@ -95,9 +95,9 @@ public class QuanLiXe extends Fragment implements RecyclerViewAdapter.itemListen
         recyclerView.setAdapter(adapter);
         adapter.setList(mList);
         
-        //getALlXe();
-        setFilter();
-        search();
+        getALlXe();
+        //setFilter();
+        //search();
 
         //adapter.notifyDataSetChanged();
         adapter.setItemListener(this);
@@ -109,7 +109,9 @@ public class QuanLiXe extends Fragment implements RecyclerViewAdapter.itemListen
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String select = filter.getItemAtPosition(position).toString();
 
+                mList.clear();
                 if(!select.equalsIgnoreCase("tất cả")){
+
                     firebase db = new firebase("xe");
                     Query query = db.getMyRef().orderByChild("loaiXe").equalTo(select);
                     query.addValueEventListener(new ValueEventListener() {
@@ -119,10 +121,9 @@ public class QuanLiXe extends Fragment implements RecyclerViewAdapter.itemListen
                             for(DataSnapshot i : snapshot.getChildren()){
                                 Xe xe = i.getValue(Xe.class);
                                 if(xe != null){
-                                    temp.add(xe);
+                                    mList.add(xe);
                                 }
                             }
-                            adapter.setList(temp);
                             adapter.notifyDataSetChanged();
                         }
 
@@ -133,6 +134,7 @@ public class QuanLiXe extends Fragment implements RecyclerViewAdapter.itemListen
                     });
                 }
                 else{
+                    Log.e("myTag", "day la tat ca" + mList.size());
                     getALlXe();
                 }
                 //Toast.makeText(getContext(), temp.size() + " ", Toast.LENGTH_SHORT).show();*/
@@ -174,11 +176,9 @@ public class QuanLiXe extends Fragment implements RecyclerViewAdapter.itemListen
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Xe xe = snapshot.getValue(Xe.class);
                 if(xe != null){
-
                     mList.add(xe);
+                    adapter.notifyDataSetChanged();
                 }
-                Log.i("myTag", mList.size() + "");
-                adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
             }
 

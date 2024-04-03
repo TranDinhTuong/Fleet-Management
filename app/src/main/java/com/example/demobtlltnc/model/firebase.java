@@ -36,6 +36,29 @@ public class firebase {
         this.myRef = myRef;
     }
 
+    public List<KeHoach> getListKeHoachByIdTaiXe(String id){
+        List<KeHoach> List = new ArrayList<>();
+        Query query = myRef.child("tai xe").orderByChild("id").equalTo(id);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot i : snapshot.getChildren()){
+                    KeHoach temp = i.getValue(KeHoach.class);
+                    if(temp != null){
+                        Log.e("tag", temp.getId());
+                        List.add(temp);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return List;
+    }
+
     public List<Xe> getListXeByTinhTrang(){
         List<Xe> ListXe = new ArrayList<>();
         Query query = myRef.orderByChild("tinhTrangXe").equalTo("không hoạt động");
@@ -103,7 +126,7 @@ public class firebase {
     }
     public List<TaiXe> getListTaiXeByTinhTrang(){
         List<TaiXe> ListTaiXe = new ArrayList<>();
-        Query query = myRef.orderByChild("tinhTrang").equalTo("dang ranh");
+        Query query = myRef.orderByChild("tinhTrang").equalTo("đang rảnh");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

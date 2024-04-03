@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.icu.text.SimpleDateFormat;
 import android.location.GnssAntennaInfo;
 import android.location.Location;
 import android.os.Bundle;
@@ -78,7 +79,9 @@ import com.mancj.materialsearchbar.adapter.SuggestionsAdapter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClickListener, TaiXeAdapter.itemListener, RecyclerViewAdapter.itemListener {
@@ -275,10 +278,12 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
 
             // Lấy giờ hiện tại
             int hour = c.get(Calendar.HOUR_OF_DAY);
-
             // Lấy phút hiện tại
             int minute = c.get(Calendar.MINUTE);
 
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+            Log.i("time" , dateFormat.format(date));
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
@@ -327,7 +332,7 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
 
                         // Chuyển đổi đơn vị
                         distance = distanceInMeters / 1000.0;
-                        time = TimeUnit.SECONDS.toMinutes(durationInSeconds);
+                        time = TimeUnit.SECONDS.toHours(durationInSeconds);
                     }
 
                     @Override
@@ -370,7 +375,6 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
         keHoach.setKhoangCach(distance);
         keHoach.setThoiGianToi(String.valueOf(time));
 
-
         if (xe.getLoaiXe().equals("xe tai")) {
             // 10k cho 1km
             double temp = distance * 10.0;
@@ -382,8 +386,12 @@ public class lapKeHoachChuyenDi extends AppCompatActivity implements View.OnClic
             double temp = distance * 18.0;
             keHoach.setChiPhi(temp + "");
         }
-        taiXe.setSoChuyenThanhCong(taiXe.getSoChuyenThanhCong() + 1);
         db.getMyRef().child(id).setValue(keHoach);
+        
+        // them vao lichSuTaiXe luon
+        firebase x = new firebase("lich su tai xe");
+        x.getMyRef().child(taiXe.getId()).push().setValue(keHoach);
+
         finish();
     }
 

@@ -22,9 +22,11 @@ import com.example.demobtlltnc.model.KeHoach;
 import com.example.demobtlltnc.model.TaiXe;
 import com.example.demobtlltnc.model.Xe;
 import com.example.demobtlltnc.model.firebase;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ChiTietKeHoach extends AppCompatActivity implements View.OnClickListener{
 
@@ -66,7 +68,7 @@ public class ChiTietKeHoach extends AppCompatActivity implements View.OnClickLis
         tvQuangDuong.setText(" " + keHoach.getKhoangCach().toString() + " Km");
         tvChiPhi.setText(" " + keHoach.getChiPhi() + "VND");
         tvThoiGian.setText(" " + keHoach.getThoiGianXuatPhat());
-        tvThoiGianUocTinh.setText(" " + keHoach.getThoiGianToi() + " Phut");
+        tvThoiGianUocTinh.setText(" " + keHoach.getThoiGianToi() + " Gio");
     }
 
     @Override
@@ -137,16 +139,46 @@ public class ChiTietKeHoach extends AppCompatActivity implements View.OnClickLis
             dialog.show();
         }
         else if(v.getId() == R.id.btn_remove){
-            //chuyen ve trang thai dang ranh va ko hoat dong
+            //chuyen ve trang thai dang ranh va ko hoat dong -> bug no se cap nhat doi tuong rong sang ben phia database taixe va xe
+            // kiem tra xem thang nay da bi xoa tren firebase chua
+
             TaiXe taiXe = keHoach.getTaiXe();
-            taiXe.setTinhTrang("dang ranh");
             firebase d1 = new firebase("tai xe");
-            d1.update(taiXe.getId(), taiXe.toMap());
+            d1.getMyRef().child(taiXe.getId()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    TaiXe tmp = snapshot.getValue(TaiXe.class);
+                    if(tmp != null){
+                        taiXe.setTinhTrang("dang ranh");
+                        d1.update(taiXe.getId(), taiXe.toMap());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
 
             Xe xe = keHoach.getXe();
-            xe.setTinhTrangXe("không hoạt động");
             firebase d2 = new firebase("xe");
-            d2.update(xe.getBienSo(), taiXe.toMap());
+            d2.getMyRef().child(xe.getBienSo()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Xe tmp = snapshot.getValue(Xe.class);
+                    if(tmp != null){
+                        xe.setTinhTrangXe("không hoạt động");
+                        d2.update(xe.getBienSo(), xe.toMap());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
             //cap nhat tren firebase
 
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());

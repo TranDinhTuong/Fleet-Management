@@ -12,12 +12,11 @@ public class TaiXe implements Serializable {
     private String soDienThoai;
     private String giayPhepLaiXe;
     private String tinhTrang;
-    private int soChuyenThanhCong;
+    private LichSuLaiXe lichSuLaiXe;
 
     public TaiXe() {
 
     }
-
 
     public TaiXe(String id, String ten, String diaChi, String soDienThoai, String giayPhepLaiXe) {
         this.id = id;
@@ -25,8 +24,8 @@ public class TaiXe implements Serializable {
         this.diaChi = diaChi;
         this.soDienThoai = soDienThoai;
         this.giayPhepLaiXe = giayPhepLaiXe;
-        this.tinhTrang = "dang ranh";
-        this.soChuyenThanhCong = 0;
+        this.tinhTrang = "đang rảnh";
+        //this.soChuyenThanhCong = 0;
     }
     public Map<String, Object> toMap(){
         Map<String, Object> result = new HashMap<>();
@@ -35,18 +34,17 @@ public class TaiXe implements Serializable {
         result.put("soDienThoai", soDienThoai);
         result.put("giayPhepLaiXe", giayPhepLaiXe);
         result.put("tinhTrang", tinhTrang);
-        result.put("soChuyenThanhCong", soChuyenThanhCong);
+        result.put("lichSuLaiXe", lichSuLaiXe);
         return  result;
     }
 
-    public int getSoChuyenThanhCong() {
-        return soChuyenThanhCong;
+    public LichSuLaiXe getLichSuLaiXe() {
+        return lichSuLaiXe;
     }
 
-    public void setSoChuyenThanhCong(int soChuyenThanhCong) {
-        this.soChuyenThanhCong = soChuyenThanhCong;
+    public void setLichSuLaiXe(LichSuLaiXe lichSuLaiXe) {
+        this.lichSuLaiXe = lichSuLaiXe;
     }
-
     public String getTinhTrang() {
         return tinhTrang;
     }
@@ -94,7 +92,5 @@ public class TaiXe implements Serializable {
     public void setGiayPhepLaiXe(String giayPhepLaiXe) {
         this.giayPhepLaiXe = giayPhepLaiXe;
     }
-
-
 
 }

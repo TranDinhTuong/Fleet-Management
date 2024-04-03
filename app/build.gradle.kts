@@ -40,11 +40,12 @@ dependencies {
     //search
     implementation ("com.github.mancj:MaterialSearchBar:0.8.5")
 
-    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.github.blackfizz:eazegraph:1.2.5l@aar")
+    implementation ("com.nineoldandroids:library:2.4.0")
 
     //gg map
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
-    implementation ("com.google.android.libraries.places:places:3.3.0")
+    implementation ("com.google.android.libraries.places:places:3.4.0")
     implementation ("com.google.maps.android:android-maps-utils:3.8.0")
     implementation ("com.google.maps:google-maps-services:0.18.0")
 

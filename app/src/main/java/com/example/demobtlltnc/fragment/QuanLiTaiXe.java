@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.demobtlltnc.ChiTietKeHoach;
+import com.example.demobtlltnc.LichSuTaiXe;
 import com.example.demobtlltnc.R;
 import com.example.demobtlltnc.adapter.TaiXeAdapter;
 import com.example.demobtlltnc.model.DoiTaiXe;
@@ -41,17 +43,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
+public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener {
     private SearchView searchView;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private TaiXeAdapter adapter;
     private Button btnAddtaixe;
     private List<TaiXe> mList;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +78,39 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
                 startActivity(intent);
             }
         });
+        /*searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                firebase db = new firebase("tai xe");
+                Query query = db.getMyRef().orderByChild("ten").equalTo(newText);
+
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<TaiXe> temp = new ArrayList<>();
+                        for (DataSnapshot i : snapshot.getChildren()){
+                            TaiXe taiXe = i.getValue(TaiXe.class);
+                            if(taiXe != null){
+                                temp.add(taiXe);
+                            }
+                        }
+                        adapter.setList(temp);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                return true;
+            }
+        });*/
 
         mList = new ArrayList<>();
         adapter = new TaiXeAdapter(mList);
@@ -85,6 +123,7 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
         adapter.setItemListener(this);
     }
 
+
     private void getTaiXe() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("tai xe");
@@ -93,7 +132,7 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 TaiXe taiXe = snapshot.getValue(TaiXe.class);
-                if(taiXe != null){
+                if (taiXe != null) {
                     mList.add(taiXe);
                     adapter.notifyDataSetChanged();
                 }
@@ -103,13 +142,13 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 TaiXe taiXe = snapshot.getValue(TaiXe.class);
-                if(taiXe == null || mList.isEmpty()){
+                if (taiXe == null || mList.isEmpty()) {
                     return;
                 }
 
-                for(int i = 0; i < mList.size(); i++){
+                for (int i = 0; i < mList.size(); i++) {
                     TaiXe temp = mList.get(i);
-                    if(taiXe.getId().equalsIgnoreCase(temp.getId())){
+                    if (taiXe.getId().equalsIgnoreCase(temp.getId())) {
                         mList.set(i, taiXe);
                         break;
                     }
@@ -120,13 +159,13 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 TaiXe taiXe = snapshot.getValue(TaiXe.class);
-                if(taiXe == null || mList.isEmpty()){
+                if (taiXe == null || mList.isEmpty()) {
                     return;
                 }
 
-                for(int i = 0; i < mList.size(); i++){
+                for (int i = 0; i < mList.size(); i++) {
                     TaiXe temp = mList.get(i);
-                    if(taiXe.getId().equalsIgnoreCase(temp.getId())){
+                    if (taiXe.getId().equalsIgnoreCase(temp.getId())) {
                         mList.remove(i);
                         break;
                     }
@@ -152,7 +191,8 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
         TaiXe taiXe = mList.get(postion);
         openDialogUpdateItem(taiXe);
     }
-    private void openDialogUpdateItem(TaiXe taiXe){
+
+    private void openDialogUpdateItem(TaiXe taiXe) {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.capnhat_chitiet_taixe);
@@ -165,12 +205,13 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
         EditText eSdt = dialog.findViewById(R.id.edt_std);
         EditText eDiaChi = dialog.findViewById(R.id.edt_dia_chi);
         EditText eGiayPhepLaiXe = dialog.findViewById(R.id.edt_giay_phep_lai_xe);
+        TextView tvLichSuTaiXe = dialog.findViewById(R.id.tv_lich_su_tai_xe);
 
         Spinner spTinhTrang = dialog.findViewById(R.id.sp_tinhTrang);
         spTinhTrang.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.item_spinner, getResources().getStringArray(R.array.tinhtrangTaiXe)));
         int k = 0;
-        for(String x : getResources().getStringArray(R.array.tinhtrangTaiXe)){
-            if(taiXe.getTinhTrang().equalsIgnoreCase(x)){
+        for (String x : getResources().getStringArray(R.array.tinhtrangTaiXe)) {
+            if (taiXe.getTinhTrang().equalsIgnoreCase(x)) {
                 spTinhTrang.setSelection(k);
                 break;
             }
@@ -186,6 +227,15 @@ public class QuanLiTaiXe extends Fragment implements TaiXeAdapter.itemListener{
         Button btnCapNhat = dialog.findViewById(R.id.btn_update);
         Button btnXoa = dialog.findViewById(R.id.btn_remove);
         ImageButton btnThoat = dialog.findViewById(R.id.btn_thoat);
+
+        tvLichSuTaiXe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), LichSuTaiXe.class);
+                i.putExtra("tai xe", taiXe);
+                startActivity(i);
+            }
+        });
 
         btnThoat.setOnClickListener(new View.OnClickListener() {
             @Override

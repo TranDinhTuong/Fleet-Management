@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemobtlLTNC"
         tools:targetApi="31">
+        <activity
+            android:name=".LichSuTaiXe"
+            android:exported="false" />
         <activity
             android:name=".ChiTietKeHoach"
             android:exported="false" />

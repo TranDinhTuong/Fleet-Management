@@ -1,17 +1,20 @@
 package com.example.demobtlltnc.adapter;
 
 import android.icu.text.SimpleDateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.demobtlltnc.R;
 import com.example.demobtlltnc.model.Xe;
+import com.example.demobtlltnc.model.firebase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +29,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.list = list;
     }
     public RecyclerViewAdapter(){
-
     }
 
     public void setItemListener(RecyclerViewAdapter.itemListener itemListener) {
@@ -54,9 +56,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         // den ngay bao duong thi thong bao
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d/MM/yyyy", Locale.US); // chu y
         if(xe.getLichBaoDuong().equalsIgnoreCase(dateFormat.format(date))){
+            xe.setTinhTrangXe("đang bảo trì");
+            firebase db = new firebase("xe");
+            db.update(xe.getBienSo(), xe.toMap());
             holder.layout.setBackgroundColor(R.color.red);
+        }
+        else {
+            if(xe.getTinhTrangXe().equalsIgnoreCase("đang bảo trì")){
+                xe.setTinhTrangXe("không hoạt động");
+                firebase db = new firebase("xe");
+                db.update(xe.getBienSo(), xe.toMap());
+                holder.layout.setBackgroundColor(R.color.white);
+            }
         }
     }
 
